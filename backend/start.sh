@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Install dependencies
-pip install -r requirements-railway.txt
+# Set default port if PORT is not set
+export PORT=${PORT:-8000}
 
 # Start the application
-uvicorn app.main:app --host 0.0.0.0 --port $PORT
+exec uvicorn app.main:app --host 0.0.0.0 --port $PORT
