@@ -27,7 +27,7 @@ torch==2.1.1
 radon==6.0.1
 bandit==1.7.5
 ruff==0.1.6
-tree-sitter==0.23.6
+tree-sitter==0.23.2
 tree-sitter-python==0.23.6
 ast-tools==0.1.0
 pylint==3.0.3
