@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8000/api'
+const API_BASE_URL = 'https://portfolio-production-6f20.up.railway.app/api'
 
 export interface ApiResponse<T> {
   success: boolean
