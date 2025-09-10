@@ -56,7 +56,9 @@ async def root():
         "message": "Suraj Kumar Portfolio API",
         "version": "1.0.0",
         "status": "active",
+        "health": "healthy",
         "endpoints": {
+            "health": "/health",
             "mlops": "/api/mlops",
             "architecture": "/api/architecture", 
             "optimization": "/api/optimization",
@@ -70,12 +72,8 @@ async def root():
 async def health_check():
     return {
         "status": "healthy",
-        "timestamp": "2024-01-01T00:00:00Z",
-        "services": {
-            "database": "connected",
-            "redis": "connected",
-            "ml_models": "loaded"
-        }
+        "message": "Suraj Kumar Portfolio API is running",
+        "version": "1.0.0"
     }
 
 @app.websocket("/ws")
