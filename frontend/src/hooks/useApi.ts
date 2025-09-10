@@ -89,3 +89,16 @@ export function useConsultingDashboard() {
 export function useConsultingStats() {
   return useApi(() => apiService.getConsultingStats())
 }
+
+// Real-time hooks (placeholder implementations)
+export function useMLOpsRealTime() {
+  return useApi(() => apiService.getMLOpsDashboard())
+}
+
+export function useArchitectureRealTime() {
+  return useApi(() => apiService.getArchitectureDashboard())
+}
+
+export function useCostOptimizationRealTime() {
+  return useApi(() => apiService.getCostOptimizationDashboard())
+}
