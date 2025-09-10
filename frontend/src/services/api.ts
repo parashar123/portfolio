@@ -13,10 +13,14 @@ class ApiService {
     
     try {
       const response = await fetch(url, {
+        method: options?.method || 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
           ...options?.headers,
         },
+        mode: 'cors',
+        credentials: 'omit',
         ...options,
       })
 
@@ -28,7 +32,13 @@ class ApiService {
       return data
     } catch (error) {
       console.error(`API request failed for ${endpoint}:`, error)
-      throw error
+      // Return a fallback response for better error handling
+      return {
+        success: false,
+        data: null as T,
+        timestamp: new Date().toISOString(),
+        message: `API request failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      }
     }
   }
 

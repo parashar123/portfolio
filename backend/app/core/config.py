@@ -25,7 +25,8 @@ class Settings(BaseSettings):
         "https://surajkumar.dev",
         "https://www.surajkumar.dev",
         "https://suraj-portfolio-ivory.vercel.app",  # Vercel frontend
-        "https://*.vercel.app"  # Allow all Vercel deployments
+        "https://suraj-portfolio-ivory.vercel.app",  # Explicit Vercel URL
+        "*"  # Allow all origins for development
     ]
     
     ALLOWED_HOSTS: List[str] = [
