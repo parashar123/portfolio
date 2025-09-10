@@ -42,13 +42,23 @@ const initialState: AppState = {
   },
   codepitamah: {
     analysis: {
+      language: 'python',
       complexity: 0,
       maintainability: 0,
       testCoverage: 0,
       securityScore: 0,
       performanceScore: 0,
       patterns: [],
-      issues: []
+      issues: [],
+      suggestions: [],
+      metrics: {
+        linesOfCode: 0,
+        cyclomaticComplexity: 0,
+        maintainabilityIndex: 0,
+        functionCount: 0,
+        classCount: 0,
+        commentRatio: 0
+      }
     },
     suggestions: [],
     patterns: []
