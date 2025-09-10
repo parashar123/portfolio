@@ -28,6 +28,11 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# Add health endpoint before middleware
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy", "message": "API is running"}
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -37,11 +42,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Trusted host middleware
-app.add_middleware(
-    TrustedHostMiddleware,
-    allowed_hosts=settings.ALLOWED_HOSTS
-)
+# Trusted host middleware (temporarily disabled for Railway)
+# app.add_middleware(
+#     TrustedHostMiddleware,
+#     allowed_hosts=settings.ALLOWED_HOSTS
+# )
 
 # Include API routers
 app.include_router(mlops.router, prefix="/api/mlops", tags=["MLOps"])
@@ -68,13 +73,6 @@ async def root():
         }
     }
 
-@app.get("/health")
-async def health_check():
-    return {
-        "status": "healthy",
-        "message": "Suraj Kumar Portfolio API is running",
-        "version": "1.0.0"
-    }
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
