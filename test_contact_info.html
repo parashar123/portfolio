@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Info Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #1a1a1a; color: white; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #333; border-radius: 8px; }
+        button { padding: 10px 20px; margin: 10px; border: none; border-radius: 5px; cursor: pointer; }
+        .whatsapp { background: #25D366; color: white; }
+        .email { background: #007bff; color: white; }
+        .info { background: #333; padding: 10px; border-radius: 5px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Contact Information Test</h1>
+    
+    <div class="test-section">
+        <h2>Current Contact Information</h2>
+        <div class="info">
+            <strong>WhatsApp:</strong> +91 9035767307<br>
+            <strong>Email:</strong> pitamah.techinsights@gmail.com
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test WhatsApp Links</h2>
+        <button class="whatsapp" onclick="testWhatsApp('general')">Test General WhatsApp</button>
+        <button class="whatsapp" onclick="testWhatsApp('mlops')">Test MLOps WhatsApp</button>
+        <button class="whatsapp" onclick="testWhatsApp('codepitamah')">Test CodePitamah WhatsApp</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Email Links</h2>
+        <button class="email" onclick="testEmail('general')">Test General Email</button>
+        <button class="email" onclick="testEmail('mlops')">Test MLOps Email</button>
+        <button class="email" onclick="testEmail('codepitamah')">Test CodePitamah Email</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Generated URLs</h2>
+        <div id="urls"></div>
+    </div>
+
+    <script>
+        const WHATSAPP_NUMBER = "919035767307";
+        const EMAIL_ADDRESS = "pitamah.techinsights@gmail.com";
+
+        const WHATSAPP_MESSAGES = {
+            general: "Hi Suraj! I found your ML portfolio impressive and would like to discuss a potential project.",
+            mlops: "Hi Suraj! I'm interested in your MLOps expertise and would like to discuss ML pipeline implementation.",
+            codepitamah: "Hi Suraj! I tried your CodePitamah tool and would like to discuss custom code analysis solutions."
+        };
+
+        const EMAIL_SUBJECTS = {
+            general: "ML Project Inquiry",
+            mlops: "MLOps Implementation Discussion",
+            codepitamah: "CodePitamah Custom Solutions"
+        };
+
+        function createWhatsAppLink(context) {
+            const message = WHATSAPP_MESSAGES[context];
+            return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        }
+
+        function createEmailLink(context) {
+            const subject = EMAIL_SUBJECTS[context];
+            const body = `Hi Suraj,\n\nI found your portfolio and would like to discuss ${context === 'general' ? 'a potential project' : 'your services'}.\n\nBest regards,`;
+            return `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        function testWhatsApp(context) {
+            const url = createWhatsAppLink(context);
+            console.log(`WhatsApp URL for ${context}:`, url);
+            window.open(url, '_blank');
+            displayUrls();
+        }
+
+        function testEmail(context) {
+            const url = createEmailLink(context);
+            console.log(`Email URL for ${context}:`, url);
+            window.location.href = url;
+            displayUrls();
+        }
+
+        function displayUrls() {
+            const urlsDiv = document.getElementById('urls');
+            urlsDiv.innerHTML = `
+                <h3>Generated URLs:</h3>
+                <p><strong>General WhatsApp:</strong> <a href="${createWhatsAppLink('general')}" target="_blank">${createWhatsAppLink('general')}</a></p>
+                <p><strong>General Email:</strong> <a href="${createEmailLink('general')}">${createEmailLink('general')}</a></p>
+                <p><strong>MLOps WhatsApp:</strong> <a href="${createWhatsAppLink('mlops')}" target="_blank">${createWhatsAppLink('mlops')}</a></p>
+                <p><strong>CodePitamah WhatsApp:</strong> <a href="${createWhatsAppLink('codepitamah')}" target="_blank">${createWhatsAppLink('codepitamah')}</a></p>
+            `;
+        }
+
+        // Display URLs on page load
+        displayUrls();
+    </script>
+</body>
+</html>
