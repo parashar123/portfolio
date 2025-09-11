@@ -9,10 +9,15 @@ import {
   DollarSign, 
   Users,
   Activity,
-  TrendingUp
+  TrendingUp,
+  Calendar,
+  Github,
+  Linkedin,
+  Mail
 } from 'lucide-react'
 import { useAppStore } from '../../store/useAppStore'
 import { NavigationItem } from '../../types'
+import CalendarModal from '../CalendarModal'
 
 const navigationItems: NavigationItem[] = [
   {
@@ -96,13 +101,18 @@ const iconMap = {
   DollarSign,
   Users,
   Activity,
-  TrendingUp
+  TrendingUp,
+  Calendar,
+  Github,
+  Linkedin,
+  Mail
 }
 
 export default function Navigation() {
   const location = useLocation()
   const { ui, setActiveSection } = useAppStore()
   const [openMore, setOpenMore] = useState(false)
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const moreRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -242,11 +252,10 @@ export default function Navigation() {
             </div>
           </div>
 
-          {/* Mobile Navigation - Scrollable Design */}
-          <div className="lg:hidden w-full">
-            <div className="flex items-center space-x-1 overflow-x-auto scrollbar-hide pb-1">
-              {/* All Navigation Items in a scrollable row */}
-              {navigationItems.map((item) => {
+          {/* Mobile Navigation - Show only main items */}
+          <div className="lg:hidden flex items-center justify-between w-full">
+            <div className="flex items-center space-x-1">
+              {navigationItems.slice(0, 3).map((item) => {
                 const Icon = iconMap[item.icon as keyof typeof iconMap]
                 const isActive = location.pathname === item.path
                 
@@ -305,54 +314,46 @@ export default function Navigation() {
                   </Link>
                 )
               })}
-              
-              {/* More Button */}
-              <div className="flex-shrink-0 relative" ref={moreRef}>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setOpenMore(v => !v)
-                  }}
-                  className="flex items-center space-x-1 px-3 py-2 rounded-lg text-dark-300 hover:text-primary-400 hover:bg-dark-800/50 transition-all duration-200"
-                >
-                  <Activity size={16} />
-                  <span className="text-sm font-medium">More</span>
-                </button>
-              <AnimatePresence>
-                {openMore && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute right-0 mt-2 w-48 bg-dark-800 border border-primary-500/30 rounded-lg shadow-2xl z-50 overflow-hidden backdrop-blur-sm"
-                  >
-                    {moreNavigationItems.map((item) => {
-                      const Icon = iconMap[item.icon as keyof typeof iconMap]
-                      return (
-                        <Link 
-                          key={item.id}
-                          to={item.path} 
-                          className="flex items-center space-x-2 px-3 py-3 text-dark-200 hover:bg-dark-700 hover:text-primary-400 transition-colors duration-200"
-                          onClick={() => {
-                            setOpenMore(false)
-                            setActiveSection(item.id)
-                          }}
-                        >
-                          <Icon size={14} />
-                          <span className="text-sm">{item.label}</span>
-                          {item.badge && (
-                            <span className="ml-auto px-1.5 py-0.5 text-xs bg-secondary-500 text-white rounded-full">
-                              {item.badge}
-                            </span>
-                          )}
-                        </Link>
-                      )
-                    })}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              </div>
+            </div>
+
+            {/* Social Buttons for Mobile */}
+            <div className="flex items-center space-x-1">
+              <motion.button
+                onClick={() => setIsCalendarOpen(true)}
+                whileTap={{ scale: 0.95 }}
+                className="p-2 text-dark-400 hover:text-primary-400 transition-colors"
+                aria-label="Book a call"
+              >
+                <Calendar size={16} />
+              </motion.button>
+              <motion.a
+                href="https://github.com/parashar123"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileTap={{ scale: 0.95 }}
+                className="p-2 text-dark-400 hover:text-primary-400 transition-colors"
+                aria-label="GitHub"
+              >
+                <Github size={16} />
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com/in/surajkumar3"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileTap={{ scale: 0.95 }}
+                className="p-2 text-dark-400 hover:text-primary-400 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={16} />
+              </motion.a>
+              <motion.a
+                href="mailto:pitamah.techinsights@gmail.com"
+                whileTap={{ scale: 0.95 }}
+                className="p-2 text-dark-400 hover:text-primary-400 transition-colors"
+                aria-label="Email"
+              >
+                <Mail size={16} />
+              </motion.a>
             </div>
           </div>
 
@@ -369,6 +370,13 @@ export default function Navigation() {
           </div>
         </div>
       </div>
+      
+      {/* Calendar Modal */}
+      <CalendarModal
+        isOpen={isCalendarOpen}
+        onClose={() => setIsCalendarOpen(false)}
+        calendlyUrl="https://calendly.com/parasharsuraj123/30min"
+      />
     </nav>
   )
 }
