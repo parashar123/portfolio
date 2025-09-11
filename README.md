@@ -35,7 +35,7 @@ A modern, interactive portfolio showcasing ML/AI expertise and full-stack develo
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/portfolio.git
+git clone https://github.com/parashar123/portfolio.git
 cd portfolio
 ```
 

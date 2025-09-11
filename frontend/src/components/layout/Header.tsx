@@ -8,8 +8,8 @@ export default function Header() {
   const { ui } = useAppStore()
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/surajkumar', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/surajkumar', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/parashar123', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://linkedin.com/in/surajkumar3', label: 'LinkedIn' },
     { icon: Mail, href: 'mailto:pitamah.techinsights@gmail.com', label: 'Email' }
   ]
 
