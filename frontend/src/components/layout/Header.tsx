@@ -147,9 +147,10 @@ export default function Header() {
               <span className="font-mono">{formatted}</span>
             </motion.div>
             
+            {/* Hidden on mobile - Book a call and social links moved to hamburger menu only */}
             <button
               onClick={() => setIsCalendarOpen(true)}
-              className="px-3 py-1.5 rounded-md border border-dark-600 hover:border-primary-500 text-sm transition-colors duration-200"
+              className="hidden lg:block px-3 py-1.5 rounded-md border border-dark-600 hover:border-primary-500 text-sm transition-colors duration-200"
             >
               Book a call
             </button>
@@ -161,7 +162,7 @@ export default function Header() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 text-dark-400 hover:text-primary-400 transition-colors"
+                className="hidden lg:block p-2 text-dark-400 hover:text-primary-400 transition-colors"
                 aria-label={label}
               >
                 <Icon size={20} />

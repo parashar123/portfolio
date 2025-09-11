@@ -316,8 +316,8 @@ export default function Navigation() {
               })}
             </div>
 
-            {/* Social Buttons for Mobile */}
-            <div className="flex items-center space-x-1">
+            {/* Social Buttons - Hidden on mobile, only visible on larger screens */}
+            <div className="hidden lg:flex items-center space-x-1">
               <motion.button
                 onClick={() => setIsCalendarOpen(true)}
                 whileTap={{ scale: 0.95 }}

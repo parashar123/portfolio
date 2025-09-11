@@ -67,8 +67,8 @@ export default function PWAInstall() {
         </motion.div>
       )}
 
-      {/* Online Indicator */}
-      {isOnline && (
+      {/* Online Indicator - Commented out for now, might be needed in future */}
+      {/* {isOnline && (
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -85,7 +85,7 @@ export default function PWAInstall() {
             </p>
           </div>
         </motion.div>
-      )}
+      )} */}
     </AnimatePresence>
   )
 }
