@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <footer className="bg-dark-800/50 border-t border-dark-700/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
             <motion.div
@@ -88,7 +88,7 @@ export default function Footer() {
                 <Mail size={16} className="text-primary-400" />
                 <a 
                   href="mailto:pitamah.techinsights@gmail.com"
-                  className="text-dark-300 hover:text-primary-400 transition-colors text-sm"
+                  className="text-dark-300 hover:text-primary-400 transition-colors text-sm break-all"
                 >
                   pitamah.techinsights@gmail.com
                 </a>
@@ -96,7 +96,7 @@ export default function Footer() {
               
               <div className="pt-4 space-y-2">
                 <div className="text-sm text-dark-400">
-                  <span className="text-primary-400 font-medium">$2.5M+</span> Contract Impact
+                  <span className="text-primary-400 font-medium">$0.5M</span> USD Contract Impact
                 </div>
                 <div className="text-sm text-dark-400">
                   <span className="text-secondary-400 font-medium">31%</span> Cost Reduction
@@ -114,18 +114,22 @@ export default function Footer() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-8 pt-8 border-t border-dark-700/50 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0"
+          className="mt-8 pt-8 border-t border-dark-700/50 flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0"
         >
-          <div className="flex items-center space-x-2 text-sm text-dark-400">
+          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2 text-sm text-dark-400 text-center sm:text-left">
             <span>© {currentYear} Suraj Kumar. Made with</span>
-            <Heart size={16} className="text-red-500" />
-            <span>and cutting-edge technology.</span>
+            <div className="flex items-center space-x-1">
+              <Heart size={16} className="text-red-500" />
+              <span>and cutting-edge technology.</span>
+            </div>
           </div>
           
-          <div className="flex items-center space-x-4 text-sm text-dark-400">
+          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 text-sm text-dark-400 text-center sm:text-left">
             <span>Built with React, TypeScript & Tailwind</span>
-            <div className="w-2 h-2 bg-secondary-500 rounded-full animate-pulse" />
-            <span>Live Portfolio</span>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-secondary-500 rounded-full animate-pulse" />
+              <span>Live Portfolio</span>
+            </div>
           </div>
         </motion.div>
       </div>

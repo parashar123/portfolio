@@ -49,31 +49,7 @@ const TypingAnimation = ({ text, speed = 50 }: { text: string; speed?: number })
 
 export default function About() {
   const [imageError, setImageError] = useState(false)
-  const [imageSrc, setImageSrc] = useState("/suraj-professional-photo.jpg")
   const [imageLoaded, setImageLoaded] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-
-  // Reset image source on component mount
-  useEffect(() => {
-    // Try different path formats with cache busting
-    const baseUrl = window.location.origin
-    const timestamp = Date.now()
-    setImageSrc(`${baseUrl}/suraj-professional-photo.jpg?t=${timestamp}&v=${Math.random()}`)
-    setImageError(false)
-    setImageLoaded(false)
-    setIsLoading(true)
-  }, [])
-
-  // Check if we're currently showing the fallback avatar and reset
-  useEffect(() => {
-    if (imageSrc.includes("ui-avatars.com")) {
-      console.log('🔄 Detected fallback avatar, resetting to professional photo')
-      setImageSrc("/suraj-professional-photo.jpg")
-      setImageError(false)
-      setImageLoaded(false)
-      setIsLoading(true)
-    }
-  }, [imageSrc])
 
 
   const values = [
@@ -126,64 +102,37 @@ export default function About() {
               >
                 <div className="relative">
                   <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-40 lg:h-40 rounded-full overflow-hidden border-4 border-primary-500/30 shadow-2xl bg-gradient-to-br from-primary-500/20 to-secondary-500/20">
-                    {isLoading && !imageLoaded && (
+                    {!imageLoaded && !imageError && (
                       <div className="absolute inset-0 flex flex-col items-center justify-center bg-dark-800/90 text-primary-400 rounded-full">
                         <div className="w-6 h-6 border-2 border-primary-400 border-t-transparent rounded-full animate-spin mb-1"></div>
                         <span className="text-xs text-center px-2">Loading...</span>
                       </div>
                     )}
-                    {imageError && !imageLoaded && !isLoading && (
+                    {imageError && (
                       <div className="absolute inset-0 flex flex-col items-center justify-center bg-dark-800/90 text-primary-400 rounded-full">
                         <Users size={24} className="mb-1" />
                         <span className="text-xs text-center px-2">Photo</span>
                       </div>
                     )}
                     <img
-                      key={`${imageSrc}-${Date.now()}`}
-                      src={imageSrc}
+                      src="/suraj-professional-photo.jpg"
                       alt="Suraj Kumar - Professional Photo"
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 filter brightness-110 contrast-105 saturate-110"
-                      style={{ display: imageLoaded ? 'block' : 'none' }}
-                      onLoad={(e) => {
-                        console.log('✅ Photo loaded successfully!')
-                        console.log('Image dimensions:', e.currentTarget.naturalWidth, 'x', e.currentTarget.naturalHeight)
-                        
-                        // Only set as loaded if it's actually the professional photo
-                        if (e.currentTarget.src.includes('suraj-professional-photo.jpg')) {
-                          setImageError(false)
-                          setImageLoaded(true)
-                          setIsLoading(false)
-                        } else {
-                          console.log('Loaded image is not the professional photo, treating as error')
-                          setImageError(true)
-                          setImageLoaded(false)
-                          setIsLoading(false)
-                        }
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                      onLoad={() => {
+                        console.log('About Photo loaded successfully!')
+                        setImageLoaded(true)
+                        setImageError(false)
                       }}
-                      onError={(e) => {
-                        console.log('Photo failed to load')
-                        console.log('Failed URL:', e.currentTarget.src)
-                        console.log('Current location:', window.location.href)
+                      onError={() => {
+                        console.log('About Photo failed to load')
+                        
                         setImageError(true)
-                        setImageLoaded(false)
-                        setIsLoading(false)
-                        // Try different paths for the professional photo
-                        if (imageSrc.includes("suraj-professional-photo.jpg")) {
-                          console.log('Trying relative path...')
-                          setImageSrc("./suraj-professional-photo.jpg")
-                        } else if (imageSrc === "./suraj-professional-photo.jpg") {
-                          console.log('Trying absolute path...')
-                          setImageSrc("/suraj-professional-photo.jpg")
-                        } else {
-                          console.log('Professional photo not found, showing error state')
-                          // Don't set a fallback URL, just show the error state
-                        }
                       }}
                       loading="eager"
                     />
                   </div>
-                  {/* Animated ring around photo */}
-                  <motion.div
+                  {/* Animated ring around photo - temporarily disabled for debugging */}
+                  {/* <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                     className="absolute inset-0 rounded-full border-2 border-transparent"
@@ -192,7 +141,7 @@ export default function About() {
                       mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                       maskComposite: 'xor'
                     }}
-                  />
+                  /> */}
                 </div>
               </motion.div>
 
