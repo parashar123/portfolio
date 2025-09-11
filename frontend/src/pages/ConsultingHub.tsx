@@ -3,16 +3,17 @@ import { Users, TrendingUp, Award, DollarSign, Star, Calendar, Target, BarChart3
 import { useConsultingDashboard, useConsultingStats } from '../hooks/useApi'
 import { FeatureStatusBanner } from '../components/StatusIndicator'
 import ContactButtons from '../components/ContactButtons'
+import { ConsultingDashboard, ConsultingStats } from '../types'
 
 export default function ConsultingHub() {
   const { data: dashboardData, loading, error, refetch } = useConsultingDashboard()
   const { data: statsData } = useConsultingStats()
 
-  // Use dashboard data
-  const projects = dashboardData?.projects || []
-  const impact = dashboardData?.impact || null
-  const testimonials = dashboardData?.testimonials || []
-  const stats = statsData || null
+  // Use dashboard data with proper typing
+  const projects = (dashboardData as ConsultingDashboard)?.projects || []
+  const impact = (dashboardData as ConsultingDashboard)?.impact || null
+  const testimonials = (dashboardData as ConsultingDashboard)?.testimonials || []
+  const stats = (statsData as ConsultingStats) || null
 
   const getProjectStatusColor = (status: string) => {
     switch (status) {
@@ -44,7 +45,7 @@ export default function ConsultingHub() {
             <span className="gradient-text">Consulting Impact Hub</span>
           </h1>
           <p className="text-xl text-dark-300 max-w-3xl mx-auto">
-            $2.5M+ contract impact with enterprise clients, team leadership, and measurable business outcomes
+            Proven business impact with enterprise clients, team leadership, and measurable performance outcomes
           </p>
         </motion.div>
 

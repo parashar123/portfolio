@@ -1,11 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react'
+import { Menu, X, Github, Linkedin, Mail, Clock } from 'lucide-react'
 import { useAppStore } from '../../store/useAppStore'
+import CalendarModal from '../CalendarModal'
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [now, setNow] = useState(new Date())
   const { ui } = useAppStore()
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000)
+    return () => clearInterval(id)
+  }, [])
+
+  const formatted = new Intl.DateTimeFormat('en-IN', {
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true,
+    timeZoneName: 'short'
+  }).format(now)
 
   const socialLinks = [
     { icon: Github, href: 'https://github.com/parashar123', label: 'GitHub' },
@@ -36,7 +48,23 @@ export default function Header() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
+            {/* Live Time Display */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex items-center space-x-2 text-sm text-dark-300"
+            >
+              <Clock size={16} className="text-primary-400" />
+              <span className="font-mono">{formatted}</span>
+            </motion.div>
+            
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="px-3 py-1.5 rounded-md border border-dark-600 hover:border-primary-500 text-sm transition-colors duration-200"
+            >
+              Book a call
+            </button>
             {socialLinks.map(({ icon: Icon, href, label }) => (
               <motion.a
                 key={label}
@@ -91,6 +119,11 @@ export default function Header() {
 
       {/* Status Indicator */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500" />
+      <CalendarModal
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+        calendlyUrl="https://calendly.com/parasharsuraj123/30min"
+      />
     </motion.header>
   )
 }

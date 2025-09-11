@@ -155,14 +155,14 @@ export interface ArchitectureSuggestion {
 // Consulting Types
 export interface ConsultingProject {
   id: string
+  name: string
   client: string
-  title: string
   description: string
   technologies: string[]
   duration: string
-  impact: BusinessImpact
-  testimonial?: Testimonial
-  status: 'completed' | 'ongoing' | 'upcoming'
+  value: number
+  teamSize: number
+  status: 'completed' | 'in_progress' | 'planning'
 }
 
 export interface BusinessImpact {
@@ -175,12 +175,41 @@ export interface BusinessImpact {
   description: string
 }
 
+// Consulting Dashboard Types
+export interface ConsultingDashboard {
+  projects: ConsultingProject[]
+  impact: ConsultingImpact
+  testimonials: Testimonial[]
+}
+
+export interface ConsultingStats {
+  totalContractValue: number
+  teamSize: number
+  clientSatisfaction: number
+  projectsCompleted: number
+}
+
+export interface ConsultingImpact {
+  performanceImprovements: PerformanceImprovement[]
+  costSavings: CostSaving[]
+}
+
+export interface PerformanceImprovement {
+  metric: string
+  improvement: number
+}
+
+export interface CostSaving {
+  area: string
+  amount: number
+  percentage: number
+}
+
 export interface Testimonial {
   id: string
   client: string
-  role: string
-  company: string
-  content: string
+  position: string
+  quote: string
   rating: number
   date: string
 }
@@ -193,6 +222,7 @@ export interface NavigationItem {
   icon: string
   description: string
   badge?: string
+  highlight?: boolean
 }
 
 export interface ChartData {

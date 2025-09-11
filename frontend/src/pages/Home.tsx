@@ -13,6 +13,7 @@ import {
   Award
 } from 'lucide-react'
 import StatusIndicator, { CodePitamahHighlight, FeatureStatusBanner } from '../components/StatusIndicator'
+import FloatingBook from '../components/FloatingBook'
 import ContactButtons from '../components/ContactButtons'
 
 const heroVariants = {
@@ -70,7 +71,7 @@ const featureCards = [
   {
     icon: Users,
     title: 'Consulting Hub',
-    description: '$2.5M+ contract impact with client success stories',
+    description: 'Proven business impact with client success stories',
     path: '/consulting-hub',
     color: 'from-indigo-500 to-purple-500',
     status: 'demo' as const,
@@ -81,7 +82,7 @@ const featureCards = [
 const stats = [
   { label: 'ML Accuracy', value: '92.1%', icon: Target },
   { label: 'Cost Savings', value: '31%', icon: TrendingUp },
-  { label: 'Contract Impact', value: '$2.5M+', icon: Award },
+  { label: 'Performance Gain', value: '35%', icon: Award },
   { label: 'Response Time', value: '<12ms', icon: Zap }
 ]
 
@@ -123,7 +124,7 @@ export default function Home() {
               className="text-xl sm:text-2xl text-dark-300 mb-8 max-w-4xl mx-auto leading-relaxed"
             >
               Building intelligent systems that drive{' '}
-              <span className="text-primary-400 font-semibold">$2.5M+</span> in business impact.
+              <span className="text-primary-400 font-semibold">35%</span> average performance improvements.
               <br />
               Specializing in ML/AI, full-stack development, and enterprise architecture.
             </motion.p>
@@ -211,7 +212,7 @@ export default function Home() {
                     <ArrowRight size={22} className="text-white" />
                   </motion.div>
                   <motion.div 
-                    className="absolute -top-2 -right-2"
+                    className="absolute -top-1 -right-2"
                     animate={{
                       scale: [1, 1.3, 1],
                       rotate: [0, 5, -5, 0],
@@ -484,6 +485,7 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+      <FloatingBook />
     </div>
   )
 }

@@ -9,6 +9,9 @@ import ArchitectureViz from './pages/ArchitectureViz'
 import CodePitamah from './pages/CodePitamah'
 import CostOptimizer from './pages/CostOptimizer'
 import ConsultingHub from './pages/ConsultingHub'
+import About from './pages/About'
+import Experience from './pages/Experience'
+import Blog from './pages/Blog'
 
 function App() {
   const location = useLocation()
@@ -24,6 +27,9 @@ function App() {
             <Route path="/codepitamah" element={<CodePitamah />} />
             <Route path="/cost-optimizer" element={<CostOptimizer />} />
             <Route path="/consulting-hub" element={<ConsultingHub />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/blog" element={<Blog />} />
           </Routes>
         </AnimatePresence>
         <PWAInstall />
